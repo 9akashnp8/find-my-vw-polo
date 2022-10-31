@@ -5,7 +5,7 @@ from database import (
     retrieve_ad_listings,
     get_listing,
     create_listing,
-    update_listing,
+    # update_listing,
     delete_listing
 )
 from models import (
@@ -37,12 +37,12 @@ async def create_polo_listing(listing: PoloSchema):
         return ResponseModel(response, "Created Listing")
     raise HTTPException(400, "Something went wrong")
 
-@router.put("/{id}")
-async def update_polo_listing(id, listing: PoloSchema):
-    response = await update_listing(id, listing)
-    if response:
-        return ResponseModel(response, "Updated Listing")
-    raise HTTPException(404, "There is no listing with this ID")
+# @router.put("/{id}")
+# async def update_polo_listing(id, listing: PoloSchema):
+#     response = await update_listing(id, listing)
+#     if response:
+#         return ResponseModel(response, "Updated Listing")
+#     raise HTTPException(404, "There is no listing with this ID")
 
 @router.delete("/{id}")
 async def delete_polo_listing(id):

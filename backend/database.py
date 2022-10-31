@@ -41,11 +41,11 @@ async def create_listing(listing: PoloSchema):
     created_document = await polo_collection.find_one({"_id": result.inserted_id})
     return polo_helper(created_document)
 
-async def update_listing(id, data: PoloSchema):
-    print(data)
-    await polo_collection.update_one({"_id": ObjectId(id)}, {"$set": data})
-    document = await polo_collection.find_one({"id": id})
-    return document
+# async def update_listing(id, data: PoloSchema):
+#     print(data)
+#     await polo_collection.update_one({"_id": ObjectId(id)}, {"$set": data})
+#     document = await polo_collection.find_one({"id": id})
+#     return document
 
 async def delete_listing(id):
     await polo_collection.delete_one({"id": id})
