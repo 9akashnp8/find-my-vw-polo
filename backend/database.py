@@ -1,5 +1,8 @@
 from decouple import config
+from bson.objectid import ObjectId
 import motor.motor_asyncio
+
+from models import PoloSchema
 
 MONGO_URL = config("MONGO_URL")
 
@@ -24,20 +27,23 @@ def polo_helper(polo) -> dict:
 async def retrieve_ad_listings():
     ad_listings = []
     async for listing in polo_collection.find():
+        print(listing)
         ad_listings.append(polo_helper(listing))
     return ad_listings
 
 async def get_listing(id):
-    listing = await polo_collection.find_one({"id": id})
-    return listing
+    listing = await polo_collection.find_one({"_id": ObjectId(id)})
+    return polo_helper(listing)
 
-async def create_listing(listing):
+async def create_listing(listing: PoloSchema):
     document = listing
     result = await  polo_collection.insert_one(document)
-    return result
+    created_document = await polo_collection.find_one({"_id": result.inserted_id})
+    return polo_helper(created_document)
 
-async def update_listing(id, data):
-    await polo_collection.update_one({"id": id}, {"$set": data})
+async def update_listing(id, data: PoloSchema):
+    print(data)
+    await polo_collection.update_one({"_id": ObjectId(id)}, {"$set": data})
     document = await polo_collection.find_one({"id": id})
     return document
 

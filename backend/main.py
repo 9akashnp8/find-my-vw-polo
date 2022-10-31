@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from server.routes.polo import router as PoloAPIRouter
+from routes import router as PoloAPIRouter
 
 app = FastAPI()
 
@@ -10,7 +10,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methos=["*"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
