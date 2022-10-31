@@ -16,3 +16,19 @@ async def get_listings():
     if listings:
         return ResponseModel(listings, "Listings successfully retrieved")
     return ResponseModel(listings, "Empty List Returned")
+
+@router.get("/{id}")
+async def get_listing_by_id(id):
+    return 1
+
+@router.post("/")
+async def create_listing(listing):
+    return 1
+
+@router.put("/{id}")
+async def update_listing(id, listing):
+    return 1
+
+@router.delete("/{id}")
+async def delete_listing(id):
+    return 1
