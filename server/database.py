@@ -26,3 +26,22 @@ async def retrieve_ad_listings():
     async for listing in polo_collection.find():
         ad_listings.append(polo_helper(listing))
     return ad_listings
+
+async def get_listing(id):
+    listing = await polo_collection.find_one({"id": id})
+    return listing
+
+async def create_listing(listing):
+    document = listing
+    result = await  polo_collection.insert_one(document)
+    return result
+
+async def update_listing(id, data):
+    await polo_collection.update_one({"id": id}, {"$set": data})
+    document = await polo_collection.find_one({"id": id})
+    return document
+
+async def delete_listing(id):
+    await polo_collection.delete_one({"id": id})
+    return True
+
