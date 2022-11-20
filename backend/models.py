@@ -2,22 +2,24 @@ import uuid
 from pydantic import BaseModel, Field
 
 class PoloSchema(BaseModel):
-    ad_link: str = Field(...)
-    asking_price: str = Field(...)
+    _id: str = Field(...)
+    ad_price: str = Field(...)
     model_year: str = Field(...)
     kms_driven: str = Field(...)
     ad_title: str = Field(...)
     ad_location: str = Field(...)
+    ad_link: str = Field(...)
 
     class Config:
         schema_extra = {
             "example": {
-                "ad_link": "https://www.olx.in/item/volkswagen-polo-gt-tsi-2014-petrol-iid-1689682101",
-                "asking_price": "₹ 5,45,000",
-                "model_year": "2017",
-                "kms_driven": "50,000 km",
-                "ad_title": "Volkswagen Polo GT TSI, 2014, Petrol",
-                "ad_location": "Ottapalam"
+                "_id":"1704318164",
+                "ad_price":"545000",
+                "model_year":"2017",
+                "kms_driven":"93500.0",
+                "ad_title":"Volkswagen Polo",
+                "ad_location":"Punkunnam",
+                "ad_link":"/en-in/item/volkswagen-polo-15-tdi-comfortline-2017-diesel-iid-1704318164"
             }
         }
     

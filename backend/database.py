@@ -15,24 +15,23 @@ polo_collection = database.get_collection("polo_api_collection")
 # Helpers
 def polo_helper(polo) -> dict:
     return {
-        "id": str(polo["_id"]),
-        "ad_link": polo["ad_link"],
-        "asking_price": polo["asking_price"],
+        "_id": polo["_id"],
+        "ad_price": polo["ad_price"],
         "model_year": polo["model_year"],
         "kms_driven": polo["kms_driven"],
         "ad_title": polo["ad_title"],
-        "ad_location": polo["ad_location"]
+        "ad_location": polo["ad_location"],
+        "ad_link": polo["ad_link"]
     }
 
 async def retrieve_ad_listings():
     ad_listings = []
     async for listing in polo_collection.find():
-        print(listing)
         ad_listings.append(polo_helper(listing))
     return ad_listings
 
 async def get_listing(id):
-    listing = await polo_collection.find_one({"_id": ObjectId(id)})
+    listing = await polo_collection.find_one({"_id": id})
     return polo_helper(listing)
 
 async def create_listing(listing: PoloSchema):
