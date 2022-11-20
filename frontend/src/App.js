@@ -9,18 +9,17 @@ async function dataFetcher(url) {
 function App() {
 
   const {data, setData} = useSWR("http://127.0.0.1:8000/polo/", dataFetcher)
-  console.log(data)
 
   return (
     <div className='mx-20'>
       <h1 className='text-3xl bold py-5'>Find My Polo</h1>
       <div className='grid grid-cols-3 gap-5'>
-        {data.map((listing) => {
+        {data?.map((listing) => {
           return (
             <Card
               key={listing._id}
               adTitle={listing.ad_title}
-              askingPrice={listing.asking_price}
+              askingPrice={listing.ad_price}
               modelYear={listing.model_year}
               kmsDriven={listing.kms_driven}
               adLocation={listing.ad_location}            
